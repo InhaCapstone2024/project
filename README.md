@@ -20,6 +20,7 @@
 - 본 프로젝트는 Docker를 사용하므로 `.env.template` 파일을 참고하여 `.env` 파일에 환경 변수값을 작성해주세요.
     - `HOST_PORT` : 외부에서 컨테이너의 애플리케이션에 접근하는데 사용하는 포트 ( 노출되도 괜찮은 포트 )
     - `SERVER_PORT` : 애플리케이션이 컨테이너 내에서 통신하는 포트 ( 노출되면 안되는 포트 )
+    - React에서는 보안이 필요한 환경변수의 유출을 막기 위해서 `REACT_APP_`으로 시작하지 않는 환경변수는 무시되기 때문에 `REACT_APP_SPRINGBOOT_HOST_PORT`가 필요합니다.
     ```
     # 예시
     REACT_HOST_PORT=3001
@@ -27,13 +28,15 @@
 
     SPRINGBOOT_HOST_PORT=8081
     SPRINGBOOT_SERVER_PORT=8080
+
+    REACT_APP_SPRINGBOOT_HOST_PORT=8081
     ```
 - 본 프로젝트는 Spring Boot 프로젝트가 포함되어 있으므로 `application.properties.template` 파일을 참고하여 `application.properties` 파일을 작성해주세요 
-    - 이때 `SPRINGBOOT_HOST_PORT`와 `springboot-servie/src/main/resources/application.properties` 파일의 `server.port`를 일치시켜 주세요
+    - 이때 `SPRINGBOOT_SERVER_PORT`와 `springboot-servie/src/main/resources/application.properties` 파일의 `server.port`를 일치시켜 주세요
     ```
     # 예시
     spring.application.name=springboot-app
-    server.port=8081
+    server.port=8080
     ```
 
 # 3. 구동 방법
